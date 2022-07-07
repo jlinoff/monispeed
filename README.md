@@ -24,6 +24,9 @@ data collection.
 
 <img src="plot-example.png" alt="plot-example">
 
+As you an see, the plot changes color. It is red when the speed drops
+below 50Mpbs otherwise it is green.
+
 These tools can be used to monitor your interconnection to see how
 fast it is. The data and plot can also be presented to your
 internet service provider (ISP) to help track down service problems.
@@ -60,9 +63,9 @@ make weekly
 ```bash
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-=-=-= Target: help 
-=-=-= Date: Thu Jul  7 14:59:51 PDT 2022 
-=-=-= Directory: /Users/Joseph.Linoff/work/monispeed 
+=-=-= Target: help
+=-=-= Date: Thu Jul  7 14:59:51 PDT 2022
+=-=-= Directory: /Users/Joseph.Linoff/work/monispeed
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 Targets

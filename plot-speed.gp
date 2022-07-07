@@ -68,5 +68,5 @@ if ( strlen(png_file) == 0 ) {
 
 set palette model RGB defined ( 0 'light-red', 1 'forest-green' )
 plot csv_file using 2:3:($3 < 50 ? 0 : 1) \
-     with linespoints palette pt 5 lw 1 title "Mbps"
+     with linespoints palette pt 5 lw 3 title "Mbps"
 pause -1 "Press ENTER to exit the plot? "
