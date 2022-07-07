@@ -28,22 +28,54 @@ These tools can be used to monitor your interconnection to see how
 fast it is. The data and plot can also be presented to your
 internet service provider (ISP) to help track down service problems.
 
+To check the reliability of your internect connection
+check out [moniconn](https://github.com/jlinoff/moniconn).
+
 ### initial setup
-
-https://www.selenium.dev/documentation/webdriver/getting_started/install_library/
-
-```bash
-./setup.sh
-pipenv run ./chrome_verify_setup.py
-```
-
-### run the tool
+This is not required because the setup is checked before each target is run.
 
 ```bash
-pipenv run ./monispeed.sh
+make setup
 ```
 
-### moniapeed.sh environment variables
+### get an hourly report:
+
+```bash
+make hour
+```
+
+### get a daily report:
+
+```bash
+make day
+```
+
+### get a weekly report:
+
+```bash
+make weekly
+```
+
+### make help
+```bash
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+=-=-= Target: help 
+=-=-= Date: Thu Jul  7 14:59:51 PDT 2022 
+=-=-= Directory: /Users/Joseph.Linoff/work/monispeed 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Targets
+   day          Make a daily report for the next full day and display plot when done.
+   help         this help message
+   hour         Make an hourly report starting at the beginning of the next hour and display plot when done.
+   hour-now     Make an hourly report starting now and display plot when done.
+   interval     Make a custom interval report. Must set START and STOP times. Example: make interval START=13:00 STOP=17:00
+   setup        Setup the selenium python environment
+   week         Make a weekly report starting the next full day and display plot when done.
+```
+
+### monispeed.sh environment variables
 These environment variables control the behavior of monispeed.sh.
 ```
 # Environment Variables
