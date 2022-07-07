@@ -68,6 +68,7 @@ week: setup | $(REQUIRED)  ## Make a weekly report starting the next full day an
 .PHONY: setup
 setup: | $(REQUIRED)  ## Setup the selenium python environment
 	$(call hdr,"$setup")
+	shellcheck monispeed.sh
 	if [ ! -d .venv ] ; then \
 	  PIPENV_VENV_IN_PROJECT=1 pipenv install \
 	    --python=/usr/local/opt/python@3.10/bin/python3 \
