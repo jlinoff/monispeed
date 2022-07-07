@@ -21,7 +21,7 @@
 #   HEADLESS      Headless flag, default: 1 (true)
 #   INTERVAL      Test interval, default: 15m (900s)
 #   URL           The fast URL, default: https://fast.com
-#   VERBOSE       Verbosity flag (1-report status, 2-show CSV record)
+#   VERBOSE       Verbosity flag (1-show CSV record, 2-debug)
 : "${CSV=speed.csv}"
 : "${GCB:=/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 : "${GCD:=wd/chromedriver}"
@@ -62,7 +62,7 @@ function pause_until {
     SEC=$(date +%s)
     local REM=$(( SEC % INTERVAL ))
     local SLEEP_TIME=$(( INTERVAL - REM ))
-    if (( VERBOSE >= 4 )) ; then
+    if (( VERBOSE >= 2 )) ; then
         _debug "$LINENO" "$SEC % $INTERVAL => $REM : sleep $SLEEP_TIME"
     fi
     sleep $SLEEP_TIME
@@ -134,7 +134,6 @@ fi
 # display the settings
 settings
 
-
 # wait until stat condition is met
 if (( START_DATE_SLEEP_SEC )) ; then
     if (( VERBOSE )) ; then
@@ -151,13 +150,9 @@ fi
 pause_until "$INTERVAL"
 
 while true ; do
-    DATE=$(date --iso-8601=second)
-    DAY=$(date +%A)
-    if (( VERBOSE >= 2 )) ; then
-        _info "$LINENO" "querying internet speed on $DAY $DATE"
-    fi
+    # VERBOSE must be 0 for chrome_fast
     VERBOSE=0 pipenv run ./chrome_fast.py >>"$CSV"
-    if (( VERBOSE >= 2 )) ; then
+    if (( VERBOSE >= 1 )) ; then
         tail -1 "$CSV"
     fi
     if (( STOP_DATE_SEC > 0 )) ; then

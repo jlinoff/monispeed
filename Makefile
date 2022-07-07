@@ -20,7 +20,7 @@ interval: setup | $(REQUIRED)  ## Make a custom interval report. Must set START 
 	@BASE="monispeed-$(START)-to-$(STOP)" && \
 	CSV="$$BASE-$@.csv" && \
 	LOG="$$BASE-$@.log" && \
-	VERBOSE=2 START=$(START) STOP=$(STOP) CSV="$$CSV" \
+	VERBOSE=1 START=$(START) STOP=$(STOP) CSV="$$CSV" \
 		./monispeed.sh 2>&1 | tee -i -a "$$LOG" && \
 	if [ -f "$$CSV" ] ; then ./plot-speed.gp "$$CSV" ; fi
 
@@ -31,7 +31,7 @@ hour: setup | $(REQUIRED)  ## Make an hourly report starting at the beginning of
 	CSV="$$BASE-$@.csv" && \
 	LOG="$$BASE-$@.log" && \
 	START=$$(date +'%Y-%m-%dT%H:%M:00' -d '+1 hour') && \
-	VERBOSE=2 START="$$START" STOP='1 hour' CSV="$$CSV" \
+	VERBOSE=1 START="$$START" STOP='1 hour' CSV="$$CSV" \
 		./monispeed.sh 2>&1 | tee -i -a "$$LOG" && \
 	if [ -f "$$CSV" ] ; then ./plot-speed.gp "$$CSV" ; fi
 
@@ -41,7 +41,7 @@ hour-now: setup | $(REQUIRED)  ## Make an hourly report starting now and display
 	@BASE="monispeed-$$(date -d '+1 hour' +%F)" && \
 	CSV="$$BASE-$@.csv" && \
 	LOG="$$BASE-$@.log" && \
-	VERBOSE=2 STOP='1 hour' CSV="$$CSV" \
+	VERBOSE=1 STOP='1 hour' CSV="$$CSV" \
 		./monispeed.sh 2>&1 | tee -i -a "$$LOG" && \
 	if [ -f "$$CSV" ] ; then ./plot-speed.gp "$$CSV" ; fi
 
@@ -51,7 +51,7 @@ day: setup | $(REQUIRED)  ## Make a daily report for the next full day and displ
 	@BASE="monispeed-$$(date -d '+1 $@' +%F)" && \
 	LOG="$$BASE-$@.log" && \
 	CSV="$$BASE-$@.csv" && \
-	VERBOSE=2 START="23:59" STOP='1 day' CSV="$$CSV" \
+	VERBOSE=1 START="23:59" STOP='1 day' CSV="$$CSV" \
 	./monispeed.sh 2>&1 | tee -i -a "$$LOG"  && \
 	if [ -f "$$CSV" ] ; then ./plot-speed.gp "$$CSV" ; fi
 
@@ -61,7 +61,7 @@ week: setup | $(REQUIRED)  ## Make a weekly report starting the next full day an
 	BASE="monispeed-$$(date -d '+1 day' +%F)" && \
 	CSV="$$BASE-$@.csv" && \
 	LOG="$$BASE-$@.log" && \
-	VERBOSE=2 START="23:59" STOP='1 week' CSV="$$CSV" \
+	VERBOSE=1 START="23:59" STOP='1 week' CSV="$$CSV" \
 		./monispeed.sh 2>&1 | tee -i -a "$$LOG" && \
 	if [ -f "$$CSV" ] ; then ./plot-speed.gp "$$CSV" ; fi
 
