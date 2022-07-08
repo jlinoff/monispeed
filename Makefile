@@ -65,6 +65,16 @@ week: setup | $(REQUIRED)  ## Make a weekly report starting the next full day an
 		./monispeed.sh 2>&1 | tee -i -a "$$LOG" && \
 	if [ -f "$$CSV" ] ; then ./plot-speed.gp "$$CSV" ; fi
 
+.PHONY: month
+month: setup | $(REQUIRED)  ## Make a monthly report starting the next full day and display plot when done.
+	$(call hdr,"$@")
+	BASE="monispeed-$$(date -d '+1 day' +%F)" && \
+	CSV="$$BASE-$@.csv" && \
+	LOG="$$BASE-$@.log" && \
+	VERBOSE=1 START="23:59" STOP='1 month' CSV="$$CSV" \
+		./monispeed.sh 2>&1 | tee -i -a "$$LOG" && \
+	if [ -f "$$CSV" ] ; then ./plot-speed.gp "$$CSV" ; fi
+
 .PHONY: setup
 setup: | $(REQUIRED)  ## Setup the selenium python environment
 	$(call hdr,"$setup")
