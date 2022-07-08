@@ -33,6 +33,14 @@ if ( strlen(otype) > 0 && otype ne '.png' ) {
     exit
 }
 
+# collect stats from interesting columns
+set datafile separator ','
+stats csv_file using 3  # speed
+speed_mean = STATS_mean
+speed_min = STATS_min
+speed_max = STATS_max
+speed_median = STATS_median
+
 # initialize
 set term qt font "Arial,18"
 set datafile separator ','
@@ -46,7 +54,8 @@ edate=system(sprintf("head -2 %s | tail -1 | awk -F, '{print $2}'", csv_file)) #
 ldate=system(sprintf("tail -1 %s | awk -F, '{print $2}'", csv_file))
 print "earliest   : ", edate
 print "latest     : ", ldate
-title_string=sprintf("Internet Speed Analysis\nin %s\n%s to %s", csv_file, edate, ldate)
+title_string=sprintf("Internet Speed Analysis\nin %s\n%s to %s\nmean: %.2f [%.2f -> %.2f]\nmedian: %2.f", \
+                               csv_file, edate, ldate, speed_mean, speed_min, speed_max, speed_median)
 
 set title title_string
 set xlabel "date/time"
@@ -67,6 +76,7 @@ if ( strlen(png_file) == 0 ) {
 }
 
 set palette model RGB defined ( 0 'light-red', 1 'forest-green' )
-plot csv_file using 2:3:($3 < 50 ? 0 : 1) \
-     with linespoints palette pt 5 lw 3 title "Mbps"
+plot csv_file using 2:3:($3 < 50 ? 0 : 1) with linespoints palette pt 5 lw 3 title "Mbps", \
+     '' using 2:(speed_median) with linespoints lc rgb "magenta" lt 0 lw 1 title sprintf('median (%.2f)', speed_median), \
+     '' using 2:(speed_mean) with linespoints lc rgb "blue" lt 0lw 1 title sprintf('mean (%.2f)', speed_mean)
 pause -1 "Press ENTER to exit the plot? "
