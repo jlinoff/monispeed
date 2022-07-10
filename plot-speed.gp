@@ -40,6 +40,7 @@ speed_mean = STATS_mean
 speed_min = STATS_min
 speed_max = STATS_max
 speed_median = STATS_median
+speed_lb = 50  # lower bound
 
 # initialize
 set term qt font "Arial,18"
@@ -78,5 +79,6 @@ if ( strlen(png_file) == 0 ) {
 set palette model RGB defined ( 0 'light-red', 1 'forest-green' )
 plot csv_file using 2:3:($3 < 50 ? 0 : 1) with linespoints palette pt 5 lw 3 title "Mbps", \
      '' using 2:(speed_median) with linespoints lc rgb "magenta" lt 0 lw 1 title sprintf('median (%.2f)', speed_median), \
-     '' using 2:(speed_mean) with linespoints lc rgb "blue" lt 0lw 1 title sprintf('mean (%.2f)', speed_mean)
+     '' using 2:(speed_mean) with linespoints lc rgb "blue" lt 0 lw 1 title sprintf('mean (%.2f)', speed_mean), \
+     '' using 2:(speed_lb) with linespoints lc rgb "red" lt 0 lw 1 title sprintf('low bound (%.2f)', speed_lb)
 pause -1 "Press ENTER to exit the plot? "
