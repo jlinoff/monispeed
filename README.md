@@ -7,7 +7,7 @@ It was written because I suspected (and later confirmed) that my
 internet speed did not match the speed that my ISP claimed.
 
 The `monispeed.sh` _bash_ script collects data about the internet speed
-and stores it in a CSV (comma separated variable) format file.  It wraps
+and stores it in a CSV (comma separated variable) format file.
 
 The generated CSV data file can then be read by the `plot-speed.gp`
 _gnuplot script_ to generate a simple plot that the shows the
@@ -60,7 +60,7 @@ make day
 ### get a weekly report:
 
 ```bash
-make weekly
+make week
 ```
 
 ### make help
