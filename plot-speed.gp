@@ -48,7 +48,7 @@ set term qt font "Arial,18"
 set datafile separator ','
 set xdata time                          # tells gnuplot the x axis is time data
 set timefmt "%Y-%m-%dT%H:%M:%S-07:00"   # specify our time string format
-set format x "%m-%d\n%H:%M" # otherwise it will show only MM:SS
+set format x "%m-%d\n%H:%M\n%a" # otherwise it will show only MM:SS
 set yrange[0:]
 
 # set title
